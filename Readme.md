@@ -1,44 +1,155 @@
-Cyclistic Bike-Share: Member vs. Casual Analysis \& Conversion Strategy
-📌 Executive Summary
-Cyclistic, a bike-share company in Chicago, relies on maximizing annual memberships for long-term profitability. While the company has a strong base of "Casual" riders (those who purchase single-ride or full-day passes), the core business objective is to design a targeted marketing strategy to convert these casual riders into profitable Annual Members.
+# 🚲 Cyclistic Bike-Share: Converting Casual Riders into Annual Members
+### Google Cloud BigQuery • SQL • Power BI
 
-This project analyzes over 5.41 million historical bike trips to understand the distinct behavioral differences between Casual riders and Annual Members. By establishing a robust cloud-based data pipeline to bypass standard local hardware limits, the resulting analysis isolates specific geographic hubs, riding schedules, and equipment preferences to formulate a highly targeted conversion campaign.
+---
 
-🛠️ The Tech Stack
-Database \& Data Engineering: Google Cloud, BigQuery (SQL)
+## 📊 Dashboard
 
-Data Visualization \& Modeling: Microsoft Power BI, Power Query, DAX
+![Cyclistic Dashboard](assets/dashboard_final.png)
 
-Version Control: Git, GitHub
+---
 
-Data Source: The raw dataset contains 12 months of historical trip data provided by Motivate International Inc. Due to the 5.4+ million row count exceeding GitHub's file limits, the raw CSVs are not hosted in this repository.
+## 📌 Project Overview
 
-⚙️ Data Engineering Methodology
-Processing millions of rows of data crashes standard spreadsheet applications. To ensure accuracy and performance, I architected an industry-standard analytics pipeline:
+Cyclistic's business objective is to convert casual riders into annual members. This project analyzes **5.41 million bike trips** to identify behavioral differences between rider segments and develop data-driven membership conversion strategies using **Google Cloud BigQuery** and **Power BI**.
 
-Cloud Aggregation (01\_data\_aggregation.sql): Ingested 12 independent CSV files into Google BigQuery. Utilized UNION ALL statements to chunk and merge the data into a single master raw table, successfully bypassing memory constraints.
+**Raw Data → BigQuery → Feature Engineering → Power BI Dashboard → Business Recommendations**
 
-Data Cleaning \& Optimization (02\_data\_cleaning.sql): Wrote a master SQL cleaning script to standardize formats, filter out corrupted/maintenance rows, and drop heavy geospatial arrays (latitude/longitude) to optimize downstream BI rendering speeds.
+---
 
-Feature Engineering (03\_feature\_engineering.sql): Engineered necessary time-intelligence metrics (ride\_hour, ride\_length\_minutes) and custom nested CASE statements directly in SQL to force chronological sorting within Power BI, bypassing circular dependency errors.
+## 🗂 Dataset
 
-📊 Key Findings \& Behavioral Analysis
-The data model revealed distinct behavioral pillars separating our rider segments:
+Source: Cyclistic Historical Trip Data (Divvy Bike Share / Google Data Analytics Capstone)
 
-The Commuter Spike vs. The Steady Cruiser: Members exhibit sharp, highly structured usage peaks at 8:00 AM and 5:00 PM on weekdays, indicating they primarily use the service for commuting. Casual riders display a smooth, bell-curve usage pattern building throughout the afternoon.
+- 12 months of ride data
+- 5.41 million bike trips
+- Casual Riders and Annual Members
+- Ride timestamps, bike types, station information, and trip durations
 
-The Weekend Warriors: Casual ridership explodes on the weekends, peaking heavily on Friday, Saturday, and Sunday, whereas Member usage remains relatively flat across all seven days.
+---
 
-The Behavior Metric: On average, Casual riders spend 23.01 minutes per trip, compared to Members who average just 12.07 minutes, reinforcing that Members ride for utility and speed while Casuals ride for recreation.
+## 🎯 Business Question
 
-The Dockless Trend: A significant volume of trips lacked physical starting stations, highlighting a strong preference among Casual riders for dockless electric bikes. Isolating physical stations revealed the top starting locations for Casual riders are premium coastal/leisure spots (e.g., Kingsbury St \& Kinzie St, Navy Pier).
+**How can Cyclistic convert more casual riders into annual members?**
 
-💡 Strategic Recommendations
-To convert the weekend, leisure-focused Casual riders into Annual Members, Cyclistic should implement the following targeted initiatives:
+---
 
-The "Weekend Warrior" Tier: Introduce a modified annual membership designed specifically for the casual demographic. Offer a tier that provides unlimited weekend rides and extended ride-duration limits (e.g., 45 minutes) to accommodate their 23-minute average ride time.
+## 📈 Key Insights
 
-Waive Dockless E-Bike Fees for Members: Casual riders heavily utilize dockless e-bikes. By making e-bike unlocks free only for Annual Members, the company creates an immediate financial incentive for casual e-bike users to convert.
+### 1️⃣ Members Ride for Transportation
 
-Targeted Physical Marketing: Reallocate digital ad spend toward high-visibility physical ad space (kiosks, station wraps) explicitly at Kingsbury St, Navy Pier, and DuSable Lake Shore stations. These are the guaranteed physical chokepoints for Casual riders. Launch this campaign in early Spring to capture momentum before the summer peak.
+- Ride activity peaks around **8:00 AM** and **5:00 PM**
+- Strong weekday commuter patterns
+- Consistent usage throughout the work week
 
+### 2️⃣ Casual Riders Ride for Leisure
+
+- Highest activity on **Friday, Saturday, and Sunday**
+- Usage patterns suggest recreational riding
+- Less structured ride schedules compared to members
+
+### 3️⃣ Casual Riders Take Longer Trips
+
+| Rider Type | Average Ride Duration |
+|------------|----------------------|
+| Casual | 23.01 Minutes |
+| Member | 12.07 Minutes |
+
+- Casual riders spend nearly twice as much time per ride
+
+### 4️⃣ Bike Type Preferences
+
+- Casual riders show a stronger preference for electric bikes
+- Members display a more balanced bike-type distribution
+
+### 5️⃣ Popular Casual Rider Stations
+
+Top physical stations include:
+
+- Kingsbury St & Kinzie St
+- Navy Pier
+- DuSable Lake Shore Drive
+
+These stations represent high-value opportunities for targeted membership campaigns.
+
+---
+
+## 💡 Recommendations
+
+- Launch a **Weekend Membership Plan** tailored to recreational riders
+- Offer **member-exclusive e-bike incentives**
+- Deploy marketing campaigns at high-traffic casual rider stations
+- Launch conversion campaigns before peak summer demand
+- Highlight annual membership savings for frequent recreational riders
+
+---
+
+## ⚙️ Data Pipeline
+
+### 1️⃣ Data Aggregation
+
+- Combined 12 monthly datasets into a centralized BigQuery table
+- Standardized schema across all source files
+
+📂 View SQL file:  
+👉 [01_data_aggregation.sql](SQL%20Scripts/01_data_aggregation.sql)
+
+---
+
+### 2️⃣ Data Cleaning
+
+- Removed invalid and maintenance rides
+- Standardized formats for analysis
+- Optimized dataset for reporting
+
+📂 View SQL file:  
+👉 [02_data_cleaning.sql](SQL%20Scripts/02_data_cleaning.sql)
+
+---
+
+### 3️⃣ Feature Engineering
+
+- Created ride duration metrics
+- Generated hourly, daily, and monthly attributes
+- Built fields required for dashboard analysis
+
+📂 View SQL file:  
+👉 [03_feature_engineering.sql](SQL%20Scripts/03_feature_engineering.sql)
+
+---
+
+## 🛠 Tools & Skills Demonstrated
+
+### Tools
+
+- Google Cloud BigQuery
+- SQL
+- Power BI
+- Power Query
+- DAX
+- Git & GitHub
+
+### Skills
+
+- Data Cleaning & Transformation
+- Large-Scale Data Processing
+- Feature Engineering
+- Dashboard Development
+- Business Intelligence Reporting
+- Customer Behavior Analysis
+- Data Storytelling
+- Stakeholder-Focused Recommendations
+
+---
+
+## 💼 Why This Project Matters
+
+This project demonstrates the ability to:
+
+- Transform raw data into business insights
+- Design stakeholder-focused dashboards
+- Convert analytical findings into actionable recommendations
+- Process multi-million-row datasets using cloud infrastructure
+- Build scalable analytics workflows in BigQuery
+
+---
