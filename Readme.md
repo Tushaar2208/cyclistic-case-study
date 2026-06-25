@@ -92,7 +92,7 @@ These stations represent high-value opportunities for targeted membership campai
 - Standardized schema across all source files
 
 📂 View SQL file:  
-👉 [01_data_aggregation.sql](SQL%20Scripts/01_data_aggregation.sql)
+👉 [01_data_aggregation.sql](sql_scripts/01_data_aggregation.sql)
 
 ---
 
@@ -103,7 +103,7 @@ These stations represent high-value opportunities for targeted membership campai
 - Optimized dataset for reporting
 
 📂 View SQL file:  
-👉 [02_data_cleaning.sql](SQL%20Scripts/02_data_cleaning.sql)
+👉 [02_data_cleaning.sql](sql_scripts/02_data_cleaning.sql)
 
 ---
 
@@ -114,7 +114,7 @@ These stations represent high-value opportunities for targeted membership campai
 - Built fields required for dashboard analysis
 
 📂 View SQL file:  
-👉 [03_feature_engineering.sql](SQL%20Scripts/03_feature_engineering.sql)
+👉 [03_feature_engineering.sql](sql_scripts/03_feature_engineering.sql)
 
 ---
 
